@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Lazy.Captcha.Core
 
         public List<SKColor> Colors = new List<SKColor>
         {
+            SKColor.Parse("#000000"),
             SKColor.Parse("#0087ff"),
             SKColor.Parse("#339933"),
             SKColor.Parse("#ff6666"),

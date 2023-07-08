@@ -92,6 +92,8 @@
             this.Code_Lbl = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.TextBold_Cbx = new System.Windows.Forms.CheckBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.txtContent = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.CaptchaPbx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.captchaTypeOptionBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontFamilyOptionBindingSource)).BeginInit();
@@ -122,7 +124,7 @@
             // 
             // CaptchaPbx
             // 
-            this.CaptchaPbx.Location = new System.Drawing.Point(817, 104);
+            this.CaptchaPbx.Location = new System.Drawing.Point(899, 133);
             this.CaptchaPbx.Name = "CaptchaPbx";
             this.CaptchaPbx.Size = new System.Drawing.Size(98, 35);
             this.CaptchaPbx.TabIndex = 1;
@@ -814,7 +816,7 @@
             // Code_Lbl
             // 
             this.Code_Lbl.AutoSize = true;
-            this.Code_Lbl.Location = new System.Drawing.Point(930, 127);
+            this.Code_Lbl.Location = new System.Drawing.Point(1012, 156);
             this.Code_Lbl.Name = "Code_Lbl";
             this.Code_Lbl.Size = new System.Drawing.Size(0, 12);
             this.Code_Lbl.TabIndex = 38;
@@ -839,11 +841,30 @@
             this.TextBold_Cbx.UseVisualStyleBackColor = true;
             this.TextBold_Cbx.CheckedChanged += new System.EventHandler(this.TextBold_Cbx_CheckedChanged);
             // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(827, 108);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(53, 12);
+            this.label29.TabIndex = 41;
+            this.label29.Text = "指定内容";
+            // 
+            // txtContent
+            // 
+            this.txtContent.Location = new System.Drawing.Point(898, 105);
+            this.txtContent.Name = "txtContent";
+            this.txtContent.Size = new System.Drawing.Size(120, 21);
+            this.txtContent.TabIndex = 42;
+            this.txtContent.TextChanged += new System.EventHandler(this.txtContent_TextChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1069, 811);
+            this.Controls.Add(this.txtContent);
+            this.Controls.Add(this.label29);
             this.Controls.Add(this.label28);
             this.Controls.Add(this.TextBold_Cbx);
             this.Controls.Add(this.Code_Lbl);
@@ -883,7 +904,7 @@
             this.Controls.Add(this.CpatchaType_Cbx);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CaptchaPbx);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -984,6 +1005,8 @@
         private System.Windows.Forms.Label Code_Lbl;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.CheckBox TextBold_Cbx;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox txtContent;
     }
 }
 

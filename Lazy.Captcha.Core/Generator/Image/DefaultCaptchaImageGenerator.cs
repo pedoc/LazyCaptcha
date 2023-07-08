@@ -133,8 +133,13 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="width">宽</param>
         /// <param name="height">高</param>
         /// <param name="count">数量</param>
+        /// <param name="foregroundColors"></param>
         /// <returns>干扰线图形描述</returns>
-        protected virtual List<InterferenceLineGraphicDescription> GenerateInterferenceLineGraphicDescriptions(int width, int height, int count, IEnumerable<SKColor> foregroundColors)
+        protected virtual List<InterferenceLineGraphicDescription> GenerateInterferenceLineGraphicDescriptions(
+            int width,
+            int height,
+            int count,
+            IEnumerable<SKColor> foregroundColors)
         {
             var result = new List<InterferenceLineGraphicDescription>();
 
@@ -147,6 +152,7 @@ namespace Lazy.Captcha.Core.Generator.Image
                 int ctrlx2 = Random.Next(width / 4, width / 4 * 3), ctrly2 = Random.Next(5, height - 5);
                 result.Add(new InterferenceLineGraphicDescription
                 {
+                    IsAntialias = Random.Next(2) == 0,
                     Color = RandomColor(foregroundColors),
                     Start = new SKPoint(x1, y1),
                     Ctrl1 = new SKPoint(ctrlx1, ctrly1),
@@ -158,19 +164,45 @@ namespace Lazy.Captcha.Core.Generator.Image
             return result;
         }
 
+        protected virtual List<InterferenceLineGraphicDescription> GenerateInterferenceLineGraphicDescriptionsV2(
+            int width,
+            int height,
+            int count,
+            IEnumerable<SKColor> foregroundColors)
+        {
+            var result = new List<InterferenceLineGraphicDescription>();
+
+            for (var i = 0; i < count; i++)
+            {
+                int x1 = Random.Next(width), y1 = Random.Next(height);
+                int x2 = Random.Next(width), y2 = Random.Next(height);
+                result.Add(new InterferenceLineGraphicDescription
+                {
+                    IsAntialias = Random.Next(2) == 0,
+                    Color = RandomColor(foregroundColors),
+                    Start = new SKPoint(x1, y1),
+                    Ctrl1 = null,
+                    Ctrl2 = null,
+                    End = new SKPoint(x2, y2),
+                    BlendPercentage = (float)Random.NextDouble()
+                });
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// 绘制干扰线
         /// </summary>
         /// <param name="canvas">canvas</param>
-        /// <param name="width">验证码的宽</param>
-        /// <param name="height">验证码的高</param>
+        /// <param name="graphicDescriptions"></param>
         protected virtual void DrawInterferenceLines(SKCanvas canvas, List<InterferenceLineGraphicDescription> graphicDescriptions)
         {
             graphicDescriptions.ForEach(gd =>
             {
                 using (var paint = new SKPaint())
                 {
-                    paint.IsAntialias = true;
+                    paint.IsAntialias = gd.IsAntialias;
                     paint.StrokeWidth = 1;
                     paint.Style = SKPaintStyle.Stroke;
                     paint.Color = gd.Color.WithAlpha((byte)(255 * gd.BlendPercentage));
@@ -178,7 +210,15 @@ namespace Lazy.Captcha.Core.Generator.Image
                     using (SKPath path = new SKPath())
                     {
                         path.MoveTo(gd.Start);
-                        path.CubicTo(gd.Ctrl1, gd.Ctrl2, gd.End);
+                        if (gd.Ctrl1 != null && gd.Ctrl2 != null)
+                        {
+                            path.CubicTo(gd.Ctrl1.Value, gd.Ctrl2.Value, gd.End);
+                        }
+                        else
+                        {
+                            path.LineTo(gd.End);
+                        }
+                        //path.ConicTo(gd.Ctrl2, gd.End, 1);
                         canvas.DrawPath(path, paint);
                     }
                 }
@@ -189,10 +229,10 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// 绘制干扰线
         /// </summary>
         /// <param name="canvas">canvas</param>
-        /// <param name="width">option</param>
+        /// <param name="option">option</param>
         protected virtual void DrawInterferenceLines(SKCanvas canvas, CaptchaImageGeneratorOption option)
         {
-            var graphicDescriptions = GenerateInterferenceLineGraphicDescriptions(option.Width, option.Height, option.InterferenceLineCount, option.ForegroundColors);
+            var graphicDescriptions = GenerateInterferenceLineGraphicDescriptionsV2(option.Width, option.Height, option.InterferenceLineCount, option.ForegroundColors);
             DrawInterferenceLines(canvas, graphicDescriptions);
         }
 
@@ -204,6 +244,7 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="text">文本</param>
         /// <param name="font">字体</param>
         /// <param name="fontSize">字体大小</param>
+        /// <param name="foregroundColors"></param>
         /// <param name="textBold">是否粗体</param>
         /// <returns>文本图形描述</returns>
         protected virtual List<TextGraphicDescription> GenerateTextGraphicDescriptions(int width, int height, string text, SKTypeface font, float fontSize, IEnumerable<SKColor> foregroundColors, bool textBold)
@@ -245,6 +286,8 @@ namespace Lazy.Captcha.Core.Generator.Image
                     paint.Typeface = gd.Font;
                     paint.Color = gd.Color.WithAlpha((byte)(255 * gd.BlendPercentage));
                     paint.FakeBoldText = gd.TextBold;
+                    paint.TextSkewX = -0.25f;
+
                     canvas.DrawText(gd.Text, gd.Location.X, gd.Location.Y, paint);
                 }
             });
@@ -253,7 +296,7 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <summary>
         /// 绘制文本
         /// </summary>
-        /// <param name="ctx">上下文</param>
+        /// <param name="canvas">上下文</param>
         /// <param name="text"></param>
         /// <param name="option"></param>
         protected virtual void DrawTexts(SKCanvas canvas, string text, CaptchaImageGeneratorOption option)

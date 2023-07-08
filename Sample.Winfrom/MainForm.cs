@@ -146,7 +146,7 @@ namespace Sample.Winfrom
 
             // 第一次比较慢，之后会很快
             captchaId = Guid.NewGuid().ToString();
-            var data = captchaService.Generate(captchaId, 10);
+            CaptchaData data = captchaService.Generate(captchaId,txtContent.Text, 10);
             CaptchaPbx.Image = Image.FromStream(new MemoryStream(data.Bytes));
             currentCaptchaBytes = data.Bytes;
             Code_Lbl.Text = data.Code;
@@ -161,7 +161,7 @@ namespace Sample.Winfrom
                 var service = this.GenerateCaptchaService(option);
 
                 var id = Guid.NewGuid().ToString();
-                data = service.Generate(id, 10);
+                data = service.Generate(id,txtContent.Text, 10);
                 var pictureBox = this.fontPictureBoxMap[fontFamily.Text];
                 pictureBox.Image = Image.FromStream(new MemoryStream(data.Bytes));
             }
@@ -292,6 +292,13 @@ namespace Sample.Winfrom
                 this.Test_Btn.Enabled = true;
             });
             UIHelper.ShowMessageBox(this, $" 总计生成{loopCount}个\r\n 总计耗时{elapsedMilliseconds}毫秒\r\n 平均每个耗时{perConsum}毫秒\r\n 每秒可生成{oneSecondsCount}个\r\n 图片总计大小{UnitHelper.FormatFileSize(dataSize)}");
+        }
+
+        private void txtContent_TextChanged(object sender, EventArgs e)
+        {
+            if (txtContent.Text.Length > (int)this.Length_Nud.Value) return;
+
+            GenerateCaptcha();
         }
     }
 }

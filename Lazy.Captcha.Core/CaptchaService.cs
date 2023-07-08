@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Text;
+// ReSharper disable InconsistentNaming
 
 namespace Lazy.Captcha.Core
 {
@@ -41,6 +42,22 @@ namespace Lazy.Captcha.Core
             Storage.Set(captchaId, code, DateTime.Now.AddSeconds(expirySeconds.Value).ToUniversalTime());
 
             return new CaptchaData(captchaId, code, image);
+        }
+
+        public CaptchaData Generate(string captchaId, string code, int? expirySeconds = null)
+        {
+            if (string.IsNullOrEmpty(code))
+            {
+                return Generate(captchaId, expirySeconds);
+            }
+            else
+            {
+                var _captchaImageGenerator = new DefaultCaptchaImageGenerator();
+                var image = _captchaImageGenerator.Generate(code, CaptchaOptions.ImageOption);
+                expirySeconds = expirySeconds.HasValue ? expirySeconds.Value : CaptchaOptions.ExpirySeconds;
+                Storage.Set(captchaId, code, DateTime.Now.AddSeconds(expirySeconds.Value).ToUniversalTime());
+                return new CaptchaData(captchaId, code, image);
+            }
         }
 
         /// <summary>
