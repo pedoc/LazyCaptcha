@@ -13,18 +13,22 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// 是否启用动画
         /// </summary>
         public bool Animation { get; set; } = false;
+
         /// <summary>
         /// 背景色
         /// </summary>
-        public SKColor BackgroundColor { get; set; } = SKColors.White;
+        public List<SKColor> BackgroundColors { get; set; } = new List<SKColor>() { SKColors.White };
+
         /// <summary>
         /// 前景色
         /// </summary>
         public List<SKColor> ForegroundColors { get; set; }
+
         /// <summary>
         /// FontFamily
         /// </summary>
         public SKTypeface FontFamily { get; set;}= DefaultFontFamilys.Instance.Kaiti;
+
         /// <summary>
         /// 字体大小
         /// </summary>

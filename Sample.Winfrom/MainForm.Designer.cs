@@ -125,8 +125,8 @@
             // 
             // CaptchaPbx
             // 
-            CaptchaPbx.Location = new System.Drawing.Point(1049, 188);
-            CaptchaPbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            CaptchaPbx.Location = new System.Drawing.Point(967, 208);
+            CaptchaPbx.Margin = new System.Windows.Forms.Padding(4);
             CaptchaPbx.Name = "CaptchaPbx";
             CaptchaPbx.Size = new System.Drawing.Size(114, 50);
             CaptchaPbx.TabIndex = 1;
@@ -149,7 +149,7 @@
             CpatchaType_Cbx.DisplayMember = "Text";
             CpatchaType_Cbx.FormattingEnabled = true;
             CpatchaType_Cbx.Location = new System.Drawing.Point(120, 34);
-            CpatchaType_Cbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            CpatchaType_Cbx.Margin = new System.Windows.Forms.Padding(4);
             CpatchaType_Cbx.Name = "CpatchaType_Cbx";
             CpatchaType_Cbx.Size = new System.Drawing.Size(219, 25);
             CpatchaType_Cbx.TabIndex = 4;
@@ -176,7 +176,7 @@
             FontFamily_Cbx.DisplayMember = "Text";
             FontFamily_Cbx.FormattingEnabled = true;
             FontFamily_Cbx.Location = new System.Drawing.Point(120, 91);
-            FontFamily_Cbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            FontFamily_Cbx.Margin = new System.Windows.Forms.Padding(4);
             FontFamily_Cbx.Name = "FontFamily_Cbx";
             FontFamily_Cbx.Size = new System.Drawing.Size(219, 25);
             FontFamily_Cbx.TabIndex = 6;
@@ -200,7 +200,7 @@
             // FontSize_Nud
             // 
             FontSize_Nud.Location = new System.Drawing.Point(479, 89);
-            FontSize_Nud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            FontSize_Nud.Margin = new System.Windows.Forms.Padding(4);
             FontSize_Nud.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             FontSize_Nud.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             FontSize_Nud.Name = "FontSize_Nud";
@@ -212,7 +212,7 @@
             // Length_Nud
             // 
             Length_Nud.Location = new System.Drawing.Point(479, 33);
-            Length_Nud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Length_Nud.Margin = new System.Windows.Forms.Padding(4);
             Length_Nud.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             Length_Nud.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             Length_Nud.Name = "Length_Nud";
@@ -234,12 +234,11 @@
             // BubbleCount_Nud
             // 
             BubbleCount_Nud.Location = new System.Drawing.Point(770, 89);
-            BubbleCount_Nud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            BubbleCount_Nud.Margin = new System.Windows.Forms.Padding(4);
             BubbleCount_Nud.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             BubbleCount_Nud.Name = "BubbleCount_Nud";
             BubbleCount_Nud.Size = new System.Drawing.Size(140, 23);
             BubbleCount_Nud.TabIndex = 12;
-            BubbleCount_Nud.Value = new decimal(new int[] { 3, 0, 0, 0 });
             BubbleCount_Nud.ValueChanged += BubbleCount_Nud_ValueChanged;
             // 
             // label5
@@ -255,7 +254,7 @@
             // BubbleThickness_Nud
             // 
             BubbleThickness_Nud.Location = new System.Drawing.Point(1048, 92);
-            BubbleThickness_Nud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            BubbleThickness_Nud.Margin = new System.Windows.Forms.Padding(4);
             BubbleThickness_Nud.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
             BubbleThickness_Nud.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             BubbleThickness_Nud.Name = "BubbleThickness_Nud";
@@ -277,7 +276,7 @@
             // BubbleMaxRadius_Nud
             // 
             BubbleMaxRadius_Nud.Location = new System.Drawing.Point(479, 147);
-            BubbleMaxRadius_Nud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            BubbleMaxRadius_Nud.Margin = new System.Windows.Forms.Padding(4);
             BubbleMaxRadius_Nud.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             BubbleMaxRadius_Nud.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             BubbleMaxRadius_Nud.Name = "BubbleMaxRadius_Nud";
@@ -299,7 +298,7 @@
             // BubbleMinRadius_Nud
             // 
             BubbleMinRadius_Nud.Location = new System.Drawing.Point(117, 147);
-            BubbleMinRadius_Nud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            BubbleMinRadius_Nud.Margin = new System.Windows.Forms.Padding(4);
             BubbleMinRadius_Nud.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             BubbleMinRadius_Nud.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             BubbleMinRadius_Nud.Name = "BubbleMinRadius_Nud";
@@ -321,7 +320,7 @@
             // InterferenceLineCount_Nud
             // 
             InterferenceLineCount_Nud.Location = new System.Drawing.Point(770, 147);
-            InterferenceLineCount_Nud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            InterferenceLineCount_Nud.Margin = new System.Windows.Forms.Padding(4);
             InterferenceLineCount_Nud.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             InterferenceLineCount_Nud.Name = "InterferenceLineCount_Nud";
             InterferenceLineCount_Nud.Size = new System.Drawing.Size(140, 23);
@@ -343,7 +342,7 @@
             // 
             Gif_Cbx.AutoSize = true;
             Gif_Cbx.Location = new System.Drawing.Point(107, 205);
-            Gif_Cbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Gif_Cbx.Margin = new System.Windows.Forms.Padding(4);
             Gif_Cbx.Name = "Gif_Cbx";
             Gif_Cbx.Size = new System.Drawing.Size(39, 21);
             Gif_Cbx.TabIndex = 21;
@@ -365,7 +364,7 @@
             // 
             FrameDelay_Ndp.Increment = new decimal(new int[] { 100, 0, 0, 0 });
             FrameDelay_Ndp.Location = new System.Drawing.Point(479, 198);
-            FrameDelay_Ndp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            FrameDelay_Ndp.Margin = new System.Windows.Forms.Padding(4);
             FrameDelay_Ndp.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             FrameDelay_Ndp.Minimum = new decimal(new int[] { 100, 0, 0, 0 });
             FrameDelay_Ndp.Name = "FrameDelay_Ndp";
@@ -409,13 +408,13 @@
             // Width_Nud
             // 
             Width_Nud.Location = new System.Drawing.Point(770, 35);
-            Width_Nud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Width_Nud.Margin = new System.Windows.Forms.Padding(4);
             Width_Nud.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
             Width_Nud.Minimum = new decimal(new int[] { 98, 0, 0, 0 });
             Width_Nud.Name = "Width_Nud";
             Width_Nud.Size = new System.Drawing.Size(140, 23);
             Width_Nud.TabIndex = 29;
-            Width_Nud.Value = new decimal(new int[] { 98, 0, 0, 0 });
+            Width_Nud.Value = new decimal(new int[] { 160, 0, 0, 0 });
             Width_Nud.ValueChanged += Width_Nud_ValueChanged;
             // 
             // label14
@@ -431,12 +430,12 @@
             // Height_Nud
             // 
             Height_Nud.Location = new System.Drawing.Point(1048, 35);
-            Height_Nud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Height_Nud.Margin = new System.Windows.Forms.Padding(4);
             Height_Nud.Minimum = new decimal(new int[] { 10, 0, 0, 0 });
             Height_Nud.Name = "Height_Nud";
             Height_Nud.Size = new System.Drawing.Size(140, 23);
             Height_Nud.TabIndex = 31;
-            Height_Nud.Value = new decimal(new int[] { 35, 0, 0, 0 });
+            Height_Nud.Value = new decimal(new int[] { 60, 0, 0, 0 });
             Height_Nud.ValueChanged += Height_Nud_ValueChanged;
             // 
             // label15
@@ -473,10 +472,10 @@
             groupBox1.Controls.Add(Fresnel_Pbx);
             groupBox1.Controls.Add(label16);
             groupBox1.Controls.Add(Actionj_Pbx);
-            groupBox1.Location = new System.Drawing.Point(14, 912);
-            groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            groupBox1.Location = new System.Drawing.Point(14, 557);
+            groupBox1.Margin = new System.Windows.Forms.Padding(4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            groupBox1.Padding = new System.Windows.Forms.Padding(4);
             groupBox1.Size = new System.Drawing.Size(1219, 220);
             groupBox1.TabIndex = 32;
             groupBox1.TabStop = false;
@@ -495,7 +494,7 @@
             // Robot_Pbx
             // 
             Robot_Pbx.Location = new System.Drawing.Point(846, 126);
-            Robot_Pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Robot_Pbx.Margin = new System.Windows.Forms.Padding(4);
             Robot_Pbx.Name = "Robot_Pbx";
             Robot_Pbx.Size = new System.Drawing.Size(114, 50);
             Robot_Pbx.TabIndex = 53;
@@ -514,7 +513,7 @@
             // Progbot_Pbx
             // 
             Progbot_Pbx.Location = new System.Drawing.Point(639, 126);
-            Progbot_Pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Progbot_Pbx.Margin = new System.Windows.Forms.Padding(4);
             Progbot_Pbx.Name = "Progbot_Pbx";
             Progbot_Pbx.Size = new System.Drawing.Size(114, 50);
             Progbot_Pbx.TabIndex = 51;
@@ -533,7 +532,7 @@
             // Lexo_Pbx
             // 
             Lexo_Pbx.Location = new System.Drawing.Point(444, 126);
-            Lexo_Pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Lexo_Pbx.Margin = new System.Windows.Forms.Padding(4);
             Lexo_Pbx.Name = "Lexo_Pbx";
             Lexo_Pbx.Size = new System.Drawing.Size(114, 50);
             Lexo_Pbx.TabIndex = 49;
@@ -552,7 +551,7 @@
             // Headache_Pbx
             // 
             Headache_Pbx.Location = new System.Drawing.Point(250, 126);
-            Headache_Pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Headache_Pbx.Margin = new System.Windows.Forms.Padding(4);
             Headache_Pbx.Name = "Headache_Pbx";
             Headache_Pbx.Size = new System.Drawing.Size(114, 50);
             Headache_Pbx.TabIndex = 47;
@@ -571,7 +570,7 @@
             // Epilog_Pbx
             // 
             Epilog_Pbx.Location = new System.Drawing.Point(63, 126);
-            Epilog_Pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Epilog_Pbx.Margin = new System.Windows.Forms.Padding(4);
             Epilog_Pbx.Name = "Epilog_Pbx";
             Epilog_Pbx.Size = new System.Drawing.Size(114, 50);
             Epilog_Pbx.TabIndex = 45;
@@ -590,7 +589,7 @@
             // Scandal_Pbx
             // 
             Scandal_Pbx.Location = new System.Drawing.Point(1024, 30);
-            Scandal_Pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Scandal_Pbx.Margin = new System.Windows.Forms.Padding(4);
             Scandal_Pbx.Name = "Scandal_Pbx";
             Scandal_Pbx.Size = new System.Drawing.Size(114, 50);
             Scandal_Pbx.TabIndex = 43;
@@ -609,7 +608,7 @@
             // Ransom_Pbx
             // 
             Ransom_Pbx.Location = new System.Drawing.Point(846, 30);
-            Ransom_Pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Ransom_Pbx.Margin = new System.Windows.Forms.Padding(4);
             Ransom_Pbx.Name = "Ransom_Pbx";
             Ransom_Pbx.Size = new System.Drawing.Size(114, 50);
             Ransom_Pbx.TabIndex = 41;
@@ -628,7 +627,7 @@
             // Prefix_Pbx
             // 
             Prefix_Pbx.Location = new System.Drawing.Point(639, 30);
-            Prefix_Pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Prefix_Pbx.Margin = new System.Windows.Forms.Padding(4);
             Prefix_Pbx.Name = "Prefix_Pbx";
             Prefix_Pbx.Size = new System.Drawing.Size(114, 50);
             Prefix_Pbx.TabIndex = 39;
@@ -647,7 +646,7 @@
             // Kaiti_Pbx
             // 
             Kaiti_Pbx.Location = new System.Drawing.Point(444, 30);
-            Kaiti_Pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Kaiti_Pbx.Margin = new System.Windows.Forms.Padding(4);
             Kaiti_Pbx.Name = "Kaiti_Pbx";
             Kaiti_Pbx.Size = new System.Drawing.Size(114, 50);
             Kaiti_Pbx.TabIndex = 37;
@@ -666,7 +665,7 @@
             // Fresnel_Pbx
             // 
             Fresnel_Pbx.Location = new System.Drawing.Point(250, 30);
-            Fresnel_Pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Fresnel_Pbx.Margin = new System.Windows.Forms.Padding(4);
             Fresnel_Pbx.Name = "Fresnel_Pbx";
             Fresnel_Pbx.Size = new System.Drawing.Size(114, 50);
             Fresnel_Pbx.TabIndex = 35;
@@ -685,7 +684,7 @@
             // Actionj_Pbx
             // 
             Actionj_Pbx.Location = new System.Drawing.Point(63, 30);
-            Actionj_Pbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Actionj_Pbx.Margin = new System.Windows.Forms.Padding(4);
             Actionj_Pbx.Name = "Actionj_Pbx";
             Actionj_Pbx.Size = new System.Drawing.Size(114, 50);
             Actionj_Pbx.TabIndex = 33;
@@ -694,7 +693,7 @@
             // FetchSize_Btn
             // 
             FetchSize_Btn.Location = new System.Drawing.Point(686, 251);
-            FetchSize_Btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            FetchSize_Btn.Margin = new System.Windows.Forms.Padding(4);
             FetchSize_Btn.Name = "FetchSize_Btn";
             FetchSize_Btn.Size = new System.Drawing.Size(105, 33);
             FetchSize_Btn.TabIndex = 33;
@@ -705,7 +704,7 @@
             // Test_Btn
             // 
             Test_Btn.Location = new System.Drawing.Point(798, 251);
-            Test_Btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Test_Btn.Margin = new System.Windows.Forms.Padding(4);
             Test_Btn.Name = "Test_Btn";
             Test_Btn.Size = new System.Drawing.Size(102, 33);
             Test_Btn.TabIndex = 34;
@@ -716,7 +715,7 @@
             // Quality_Nud
             // 
             Quality_Nud.Location = new System.Drawing.Point(770, 198);
-            Quality_Nud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Quality_Nud.Margin = new System.Windows.Forms.Padding(4);
             Quality_Nud.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             Quality_Nud.Name = "Quality_Nud";
             Quality_Nud.Size = new System.Drawing.Size(140, 23);
@@ -747,7 +746,7 @@
             // Code_Lbl
             // 
             Code_Lbl.AutoSize = true;
-            Code_Lbl.Location = new System.Drawing.Point(1181, 221);
+            Code_Lbl.Location = new System.Drawing.Point(1149, 226);
             Code_Lbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             Code_Lbl.Name = "Code_Lbl";
             Code_Lbl.Size = new System.Drawing.Size(0, 17);
@@ -767,7 +766,7 @@
             // 
             TextBold_Cbx.AutoSize = true;
             TextBold_Cbx.Location = new System.Drawing.Point(279, 204);
-            TextBold_Cbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            TextBold_Cbx.Margin = new System.Windows.Forms.Padding(4);
             TextBold_Cbx.Name = "TextBold_Cbx";
             TextBold_Cbx.Size = new System.Drawing.Size(39, 21);
             TextBold_Cbx.TabIndex = 39;
@@ -788,7 +787,7 @@
             // txtContent
             // 
             txtContent.Location = new System.Drawing.Point(1048, 149);
-            txtContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            txtContent.Margin = new System.Windows.Forms.Padding(4);
             txtContent.Name = "txtContent";
             txtContent.Size = new System.Drawing.Size(139, 23);
             txtContent.TabIndex = 42;
@@ -797,7 +796,7 @@
             // btnTrainGenerate
             // 
             btnTrainGenerate.Location = new System.Drawing.Point(565, 251);
-            btnTrainGenerate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            btnTrainGenerate.Margin = new System.Windows.Forms.Padding(4);
             btnTrainGenerate.Name = "btnTrainGenerate";
             btnTrainGenerate.Size = new System.Drawing.Size(105, 33);
             btnTrainGenerate.TabIndex = 43;
@@ -807,18 +806,18 @@
             // 
             // txtConfigJson
             // 
-            txtConfigJson.Location = new System.Drawing.Point(20, 292);
+            txtConfigJson.Location = new System.Drawing.Point(14, 292);
             txtConfigJson.Multiline = true;
             txtConfigJson.Name = "txtConfigJson";
             txtConfigJson.ReadOnly = true;
-            txtConfigJson.Size = new System.Drawing.Size(1167, 603);
+            txtConfigJson.Size = new System.Drawing.Size(1173, 257);
             txtConfigJson.TabIndex = 44;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1247, 1149);
+            ClientSize = new System.Drawing.Size(1247, 792);
             Controls.Add(txtConfigJson);
             Controls.Add(btnTrainGenerate);
             Controls.Add(txtContent);
@@ -862,7 +861,7 @@
             Controls.Add(label1);
             Controls.Add(CaptchaPbx);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            Margin = new System.Windows.Forms.Padding(4);
             MaximizeBox = false;
             Name = "MainForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

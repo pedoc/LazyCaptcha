@@ -25,7 +25,8 @@ namespace Lazy.Captcha.Core.Generator.Image.Option
         /// <returns></returns>
         public DefaultCaptchaImageOptionBuilder CaptchaType(SKColor backgroundColor)
         {
-            this._option.BackgroundColor = backgroundColor;
+            this._option.BackgroundColors??=new List<SKColor>();
+            this._option.BackgroundColors.Add(backgroundColor);
             return this;
         }
 

@@ -20,6 +20,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Lazy.Captcha.Core.Generator.Code;
+using MoreLinq;
 
 namespace Sample.Winfrom
 {
@@ -117,6 +118,7 @@ namespace Sample.Winfrom
                 .Height(options.ImageOption.Height)
                 .Quality(options.ImageOption.Quality)
                 .TextBold(options.ImageOption.TextBold)
+                .BackgroundColors(DefaultColors.Instance.BackgroundColors)
                 .Build();
         }
 
@@ -298,35 +300,43 @@ namespace Sample.Winfrom
             string trainDir = Path.Combine(dir, "train");
             string valDir = Path.Combine(dir, "val");
 
-            if (Directory.Exists(trainDir))
-                Directory.Delete(trainDir, true);
+            try
+            {
+                if (Directory.Exists(trainDir))
+                    Directory.Delete(trainDir, true);
+            }
+            catch(Exception ex){}               
 
-            if (Directory.Exists(valDir))
-                Directory.Delete(valDir, true);
+            try
+            {
+                if (Directory.Exists(valDir))
+                    Directory.Delete(valDir, true);
+            }
+            catch(Exception ex){}
 
             Directory.CreateDirectory(trainDir);
             Directory.CreateDirectory(valDir);
 
             var count = 10_0000;
-            for (int i = 0; i <= count; i++)
+            for (int i = 1; i <= count; i++)
             {
                 var captchaId = Guid.NewGuid().ToString();
-                var code = RandomSeqGenerator((int)this.Length_Nud.Value);
+                var code = RandomSeqGenerator2((int)this.Length_Nud.Value);
                 CaptchaData data = captchaService.Generate(captchaId, code);
                 var bitmap = ApplyFilter(data.Bytes);
                 TryWrite(Path.Combine(trainDir, $"{code}.{i}.png"), bitmap);
             }
 
-            for (int i = 0; i <= (int)(count * 0.01); i++)
+            for (int i = 1; i <= (int)(count * 0.01); i++)
             {
                 var captchaId = Guid.NewGuid().ToString();
-                var code = RandomSeqGenerator((int)this.Length_Nud.Value);
+                var code = RandomSeqGenerator2((int)this.Length_Nud.Value);
                 CaptchaData data = captchaService.Generate(captchaId, code);
                 var bitmap = ApplyFilter(data.Bytes);
                 TryWrite(Path.Combine(valDir, $"{code}.{i}.png"), bitmap);
             }
 
-            MessageBox.Show(this,@"生成完成");
+            MessageBox.Show(this, @"生成完成");
 
             static byte[] ApplyFilter(byte[] data)
             {
@@ -377,6 +387,20 @@ namespace Sample.Winfrom
                 {
                     var @char = Random.Shared.Next(0, Characters.DEFAULT.Count);
                     sb.Append(Characters.DEFAULT[@char]);
+                }
+
+                return sb.ToString();
+            }
+
+            static string RandomSeqGenerator2(int length)
+            {
+                var sb = new StringBuilder();
+                for (int i = 0; i < length; i++)
+                {
+                    var c1 = (char)Random.Shared.Next(48, 57 + 1);
+                    var c2 = (char) Random.Shared.Next(97, 122 + 1);
+                    var c3 = (char) Random.Shared.Next(65, 90 + 1);
+                    sb.Append(new List<char>() { c1, c2, c3 }.Shuffle().First());
                 }
 
                 return sb.ToString();

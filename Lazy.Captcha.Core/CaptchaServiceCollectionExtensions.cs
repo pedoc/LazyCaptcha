@@ -40,9 +40,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 var backgroundColor = configuration?.GetSection("CaptchaOptions:ImageOption:BackgroundColor")?.Value;
                 if (!string.IsNullOrWhiteSpace(backgroundColor))
                 {
+                    options.ImageOption.BackgroundColors ??= new List<SKColor>();
                     if (SKColor.TryParse(backgroundColor, out var color))
                     {
-                        options.ImageOption.BackgroundColor = color;
+                        options.ImageOption.BackgroundColors.Add(color);
                     }
                 }
 

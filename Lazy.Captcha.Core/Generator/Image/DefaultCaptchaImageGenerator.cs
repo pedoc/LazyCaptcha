@@ -383,8 +383,9 @@ namespace Lazy.Captcha.Core.Generator.Image
             {
                 using (var canvas = new SKCanvas(bitmap))
                 {
+                    var backgroundColor = RandomColor(option.BackgroundColors);
                     // 绘制背景色
-                    canvas.DrawColor(option.BackgroundColor);
+                    canvas.DrawColor(backgroundColor);
                     // 绘制气泡
                     DrawBubbles(canvas, option);
                     // 绘制干扰线
@@ -459,8 +460,9 @@ namespace Lazy.Captcha.Core.Generator.Image
                 {
                     using (var canvas = new SKCanvas(bitmap))
                     {
+                        var backgroundColor = RandomColor(option.BackgroundColors);
                         // 绘制背景色
-                        canvas.DrawColor(option.BackgroundColor);
+                        canvas.DrawColor(backgroundColor);
                         // 绘制气泡
                         DrawBubbles(canvas, bubbleGraphicDescriptions);
                         // 绘制干扰线

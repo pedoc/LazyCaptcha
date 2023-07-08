@@ -29,5 +29,14 @@ namespace Lazy.Captcha.Core
             SKColor.Parse("#0099cc"),
             SKColor.Parse("#003366"),
         };
+
+        public List<SKColor> BackgroundColors = new List<SKColor>
+        {
+            SKColor.Parse("#FEF2FE"),
+            SKColor.Parse("#F5F2FD"),
+            SKColor.Parse("#E8FAFB"),
+            SKColor.Parse("#FAE7F8"),
+            SKColor.Parse("#EEF0F7")
+        };
     }
 }

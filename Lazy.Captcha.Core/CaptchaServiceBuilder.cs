@@ -119,11 +119,11 @@ namespace Lazy.Captcha.Core
         /// <summary>
         /// 背景色
         /// </summary>
-        /// <param name="backgroundColor"></param>
+        /// <param name="backgroundColors"></param>
         /// <returns></returns>
-        public CaptchaServiceBuilder BackgroundColor(SKColor backgroundColor)
+        public CaptchaServiceBuilder BackgroundColors(List<SKColor> backgroundColors)
         {
-            CaptchaOptions.ImageOption.BackgroundColor = backgroundColor;
+            CaptchaOptions.ImageOption.BackgroundColors = backgroundColors;
             return this;
         }
 

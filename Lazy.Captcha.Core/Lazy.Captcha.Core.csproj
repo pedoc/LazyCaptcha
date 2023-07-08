@@ -8,6 +8,7 @@
     <AssemblyVersion>2.0.3</AssemblyVersion>
     <Version>2.0.3</Version>
     <PackageTags>captcha 验证码</PackageTags>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Base\**" />
