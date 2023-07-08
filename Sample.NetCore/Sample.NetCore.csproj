@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -7,26 +6,21 @@
     <UserSecretsId>8f38fd12-0eb2-4a15-992a-68e26293d7f5</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="CustomFonts\BunnyeggsRegular-8M5aZ.ttf" />
     <None Remove="CustomFonts\KgHappy-wWZZ.ttf" />
     <None Remove="CustomFonts\WhoaSaucePersonalUseBold-mLmV5.ttf" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="CustomFonts\BunnyeggsRegular-8M5aZ.ttf" />
     <EmbeddedResource Include="CustomFonts\KgHappy-wWZZ.ttf" />
     <EmbeddedResource Include="CustomFonts\WhoaSaucePersonalUseBold-mLmV5.ttf" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.3" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Lazy.Captcha.Core\Lazy.Captcha.Core.csproj" />
   </ItemGroup>
-
 </Project>

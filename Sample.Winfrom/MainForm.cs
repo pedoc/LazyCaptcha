@@ -7,6 +7,7 @@ using Sample.Winfrom.Models;
 using Sample.Winfrom.OptionProviders;
 using SkiaSharp;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,8 +16,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Lazy.Captcha.Core.Generator.Code;
 
 namespace Sample.Winfrom
 {
@@ -95,25 +98,26 @@ namespace Sample.Winfrom
 
         private CaptchaService GenerateCaptchaService(CaptchaOptionsJsonModel options)
         {
-            var fontFamily = FontFamilyOptionProvider.Provide().First(e => e.Text == options.ImageOption.FontFamily).Value;
+            var fontFamily = FontFamilyOptionProvider.Provide().First(e => e.Text == options.ImageOption.FontFamily)
+                .Value;
             return CaptchaServiceBuilder
-               .New()
-               .CodeLength(options.CodeLength)
-               .CaptchaType((CaptchaType)options.CaptchaType)
-               .FontFamily(fontFamily)
-               .FontSize(options.ImageOption.FontSize)
-               .BubbleCount(options.ImageOption.BubbleCount)
-               .BubbleThickness(options.ImageOption.BubbleThickness)
-               .BubbleMinRadius(options.ImageOption.BubbleMinRadius)
-               .BubbleMaxRadius(options.ImageOption.BubbleMaxRadius)
-               .InterferenceLineCount(options.ImageOption.InterferenceLineCount)
-               .Animation(options.ImageOption.Animation)
-               .FrameDelay(options.ImageOption.FrameDelay)
-               .Width(options.ImageOption.Width)
-               .Height(options.ImageOption.Height)
-               .Quality(options.ImageOption.Quality)
-               .TextBold(options.ImageOption.TextBold)
-               .Build();
+                .New()
+                .CodeLength(options.CodeLength)
+                .CaptchaType((CaptchaType)options.CaptchaType)
+                .FontFamily(fontFamily)
+                .FontSize(options.ImageOption.FontSize)
+                .BubbleCount(options.ImageOption.BubbleCount)
+                .BubbleThickness(options.ImageOption.BubbleThickness)
+                .BubbleMinRadius(options.ImageOption.BubbleMinRadius)
+                .BubbleMaxRadius(options.ImageOption.BubbleMaxRadius)
+                .InterferenceLineCount(options.ImageOption.InterferenceLineCount)
+                .Animation(options.ImageOption.Animation)
+                .FrameDelay(options.ImageOption.FrameDelay)
+                .Width(options.ImageOption.Width)
+                .Height(options.ImageOption.Height)
+                .Quality(options.ImageOption.Quality)
+                .TextBold(options.ImageOption.TextBold)
+                .Build();
         }
 
         private CaptchaService GenerateCaptchaService()
@@ -127,15 +131,7 @@ namespace Sample.Winfrom
             // 生成配置
             var wrapper = new CaptchaOptionsWrapper { CaptchaOptions = this.captchaOptions };
             var json = JsonConvert.SerializeObject(wrapper, Formatting.Indented);
-            var jsonHtml = File.ReadAllText(tpl_File);
-            jsonHtml = jsonHtml.Replace("{{data}}", json);
-            File.WriteAllText(config_File, jsonHtml);
-            // 加载页面
-            WebBrowser.ScriptErrorsSuppressed = false; //禁用错误脚本提示  
-            WebBrowser.IsWebBrowserContextMenuEnabled = true; // 禁用右键菜单  
-            WebBrowser.WebBrowserShortcutsEnabled = true; //禁用快捷键  
-            WebBrowser.AllowWebBrowserDrop = false; // 禁止文件拖动  
-            WebBrowser.Navigate(config_File);
+            txtConfigJson.Text = json;
         }
 
         private void RenderCaptcha()
@@ -146,7 +142,7 @@ namespace Sample.Winfrom
 
             // 第一次比较慢，之后会很快
             captchaId = Guid.NewGuid().ToString();
-            CaptchaData data = captchaService.Generate(captchaId,txtContent.Text, 10);
+            CaptchaData data = captchaService.Generate(captchaId, txtContent.Text, 10);
             CaptchaPbx.Image = Image.FromStream(new MemoryStream(data.Bytes));
             currentCaptchaBytes = data.Bytes;
             Code_Lbl.Text = data.Code;
@@ -161,7 +157,7 @@ namespace Sample.Winfrom
                 var service = this.GenerateCaptchaService(option);
 
                 var id = Guid.NewGuid().ToString();
-                data = service.Generate(id,txtContent.Text, 10);
+                data = service.Generate(id, txtContent.Text, 10);
                 var pictureBox = this.fontPictureBoxMap[fontFamily.Text];
                 pictureBox.Image = Image.FromStream(new MemoryStream(data.Bytes));
             }
@@ -276,10 +272,7 @@ namespace Sample.Winfrom
 
         private void Test_Progress(int obj)
         {
-            UIHelper.Invoke(this, () =>
-            {
-                this.Progress_Lbl.Text = $"%{obj}";
-            });
+            UIHelper.Invoke(this, () => { this.Progress_Lbl.Text = $"%{obj}"; });
         }
 
         private void Test_Complete(int loopCount, long elapsedMilliseconds, long dataSize)
@@ -287,11 +280,9 @@ namespace Sample.Winfrom
             var perConsum = Math.Round(elapsedMilliseconds * 1.0 / loopCount, 1);
             var oneSecondsCount = (int)(1000 / perConsum);
 
-            UIHelper.Invoke(this, () =>
-            {
-                this.Test_Btn.Enabled = true;
-            });
-            UIHelper.ShowMessageBox(this, $" 总计生成{loopCount}个\r\n 总计耗时{elapsedMilliseconds}毫秒\r\n 平均每个耗时{perConsum}毫秒\r\n 每秒可生成{oneSecondsCount}个\r\n 图片总计大小{UnitHelper.FormatFileSize(dataSize)}");
+            UIHelper.Invoke(this, () => { this.Test_Btn.Enabled = true; });
+            UIHelper.ShowMessageBox(this,
+                $" 总计生成{loopCount}个\r\n 总计耗时{elapsedMilliseconds}毫秒\r\n 平均每个耗时{perConsum}毫秒\r\n 每秒可生成{oneSecondsCount}个\r\n 图片总计大小{UnitHelper.FormatFileSize(dataSize)}");
         }
 
         private void txtContent_TextChanged(object sender, EventArgs e)
@@ -299,6 +290,97 @@ namespace Sample.Winfrom
             if (txtContent.Text.Length > (int)this.Length_Nud.Value) return;
 
             GenerateCaptcha();
+        }
+
+        private void btnTrainGenerate_Click(object sender, EventArgs e)
+        {
+            const string dir = @"E:\OpenSource\PyCAPTCHA\dataset";
+            string trainDir = Path.Combine(dir, "train");
+            string valDir = Path.Combine(dir, "val");
+
+            if (Directory.Exists(trainDir))
+                Directory.Delete(trainDir, true);
+
+            if (Directory.Exists(valDir))
+                Directory.Delete(valDir, true);
+
+            Directory.CreateDirectory(trainDir);
+            Directory.CreateDirectory(valDir);
+
+            var count = 10_0000;
+            for (int i = 0; i <= count; i++)
+            {
+                var captchaId = Guid.NewGuid().ToString();
+                var code = RandomSeqGenerator((int)this.Length_Nud.Value);
+                CaptchaData data = captchaService.Generate(captchaId, code);
+                var bitmap = ApplyFilter(data.Bytes);
+                TryWrite(Path.Combine(trainDir, $"{code}.{i}.png"), bitmap);
+            }
+
+            for (int i = 0; i <= (int)(count * 0.01); i++)
+            {
+                var captchaId = Guid.NewGuid().ToString();
+                var code = RandomSeqGenerator((int)this.Length_Nud.Value);
+                CaptchaData data = captchaService.Generate(captchaId, code);
+                var bitmap = ApplyFilter(data.Bytes);
+                TryWrite(Path.Combine(valDir, $"{code}.{i}.png"), bitmap);
+            }
+
+            MessageBox.Show(this,@"生成完成");
+
+            static byte[] ApplyFilter(byte[] data)
+            {
+                return data;
+                SKBitmap originalBitmap = SKBitmap.Decode(data);
+                SKBitmap blackWhiteBitmap = new SKBitmap(originalBitmap.Width, originalBitmap.Height);
+
+                for (int x = 0; x < originalBitmap.Width; x++)
+                {
+                    for (int y = 0; y < originalBitmap.Height; y++)
+                    {
+                        // 获取原始图像的像素颜色
+                        SKColor originalColor = originalBitmap.GetPixel(x, y);
+
+                        // 计算灰度值
+                        int grayValue = (int)(originalColor.Red * 0.299f +
+                                              originalColor.Green * 0.587f +
+                                              originalColor.Blue * 0.114f);
+
+                        // 根据灰度值判断是否设置为黑色或白色
+                        SKColor blackWhiteColor = grayValue > 127 ? SKColors.White : SKColors.Black;
+
+                        // 在黑白图像上设置像素颜色
+                        blackWhiteBitmap.SetPixel(x, y, blackWhiteColor);
+                    }
+                }
+
+                var r = blackWhiteBitmap.Encode(SKEncodedImageFormat.Png, 100);
+                return r.ToArray();
+            }
+
+            static void TryWrite(string path, byte[] data)
+            {
+                try
+                {
+                    File.WriteAllBytes(path, data);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            static string RandomSeqGenerator(int length)
+            {
+                var sb = new StringBuilder();
+                for (int i = 0; i < length; i++)
+                {
+                    var @char = Random.Shared.Next(0, Characters.DEFAULT.Count);
+                    sb.Append(Characters.DEFAULT[@char]);
+                }
+
+                return sb.ToString();
+            }
         }
     }
 }

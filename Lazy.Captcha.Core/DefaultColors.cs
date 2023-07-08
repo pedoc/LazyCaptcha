@@ -15,6 +15,7 @@ namespace Lazy.Captcha.Core
         public List<SKColor> Colors = new List<SKColor>
         {
             SKColor.Parse("#000000"),
+            SKColor.Parse("#ffffff"),
             SKColor.Parse("#0087ff"),
             SKColor.Parse("#339933"),
             SKColor.Parse("#ff6666"),
