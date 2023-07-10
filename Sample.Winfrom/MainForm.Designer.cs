@@ -61,6 +61,8 @@
             Height_Nud = new System.Windows.Forms.NumericUpDown();
             label15 = new System.Windows.Forms.Label();
             groupBox1 = new System.Windows.Forms.GroupBox();
+            label30 = new System.Windows.Forms.Label();
+            LucidaGrandePbx = new System.Windows.Forms.PictureBox();
             label26 = new System.Windows.Forms.Label();
             Robot_Pbx = new System.Windows.Forms.PictureBox();
             label25 = new System.Windows.Forms.Label();
@@ -109,6 +111,7 @@
             ((System.ComponentModel.ISupportInitialize)Width_Nud).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Height_Nud).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)LucidaGrandePbx).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Robot_Pbx).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Progbot_Pbx).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Lexo_Pbx).BeginInit();
@@ -450,6 +453,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label30);
+            groupBox1.Controls.Add(LucidaGrandePbx);
             groupBox1.Controls.Add(label26);
             groupBox1.Controls.Add(Robot_Pbx);
             groupBox1.Controls.Add(label25);
@@ -480,6 +485,25 @@
             groupBox1.TabIndex = 32;
             groupBox1.TabStop = false;
             groupBox1.Text = "全部字体效果";
+            // 
+            // label30
+            // 
+            label30.AutoSize = true;
+            label30.Location = new System.Drawing.Point(1034, 183);
+            label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label30.Name = "label30";
+            label30.Size = new System.Drawing.Size(92, 17);
+            label30.TabIndex = 56;
+            label30.Text = "Lucida Grande";
+            // 
+            // LucidaGrandePbx
+            // 
+            LucidaGrandePbx.Location = new System.Drawing.Point(1024, 126);
+            LucidaGrandePbx.Margin = new System.Windows.Forms.Padding(4);
+            LucidaGrandePbx.Name = "LucidaGrandePbx";
+            LucidaGrandePbx.Size = new System.Drawing.Size(114, 50);
+            LucidaGrandePbx.TabIndex = 55;
+            LucidaGrandePbx.TabStop = false;
             // 
             // label26
             // 
@@ -881,6 +905,7 @@
             ((System.ComponentModel.ISupportInitialize)Height_Nud).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)LucidaGrandePbx).EndInit();
             ((System.ComponentModel.ISupportInitialize)Robot_Pbx).EndInit();
             ((System.ComponentModel.ISupportInitialize)Progbot_Pbx).EndInit();
             ((System.ComponentModel.ISupportInitialize)Lexo_Pbx).EndInit();
@@ -964,6 +989,8 @@
         private System.Windows.Forms.TextBox txtContent;
         private System.Windows.Forms.Button btnTrainGenerate;
         private System.Windows.Forms.TextBox txtConfigJson;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.PictureBox LucidaGrandePbx;
     }
 }
 

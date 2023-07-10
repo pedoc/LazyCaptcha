@@ -179,7 +179,7 @@ namespace Lazy.Captcha.Core.Generator.Image
                 result.Add(new InterferenceLineGraphicDescription
                 {
                     IsAntialias = Random.Next(2) == 0,
-                    Color = RandomColor(foregroundColors),
+                    Color = RandomColor(foregroundColors.Skip(3)),
                     Start = new SKPoint(x1, y1),
                     Ctrl1 = null,
                     Ctrl2 = null,
@@ -251,16 +251,22 @@ namespace Lazy.Captcha.Core.Generator.Image
         {
             var result = new List<TextGraphicDescription>();
             var textPositions = MeasureTextPositions(width, height, text, font, fontSize);
-            var colors = RandomColor(foregroundColors, text.Count());
+            var colors = RandomColor(foregroundColors.Take(3), text.Count());
 
             for (var i = 0; i < text.Count(); i++)
             {
+                var x =  textPositions[i].X;
+                var y = Random.Next((int)(textPositions[i].Y-8),(int)(textPositions[i].Y));
+                //y = (int)textPositions[i].Y;
+
                 result.Add(new TextGraphicDescription
                 {
                     Text = text[i].ToString(),
                     Font = font,
                     Color = colors[i],
-                    Location = textPositions[i],
+                    //Location = textPositions[i],
+                    Location =new PointF(x,y),
+                    //FontSize = Random.Next((int)(fontSize-4),(int)(fontSize+1)),
                     FontSize = fontSize,
                     TextBold = textBold
                 });
@@ -270,26 +276,26 @@ namespace Lazy.Captcha.Core.Generator.Image
         }
 
         /// <summary>
-        /// 绘制干扰线
+        /// 绘制文本
         /// </summary>
-        /// <param name="ctx">上下文</param>
+        /// <param name="canvas">上下文</param>
         /// <param name="graphicDescriptions">图形描述</param>
         protected virtual void DrawTexts(SKCanvas canvas, List<TextGraphicDescription> graphicDescriptions)
         {
             graphicDescriptions.ForEach(gd =>
             {
-                using (var paint = new SKPaint())
-                {
-                    paint.StrokeWidth = 1;
-                    paint.TextSize = gd.FontSize;
-                    paint.IsAntialias = true;
-                    paint.Typeface = gd.Font;
-                    paint.Color = gd.Color.WithAlpha((byte)(255 * gd.BlendPercentage));
-                    paint.FakeBoldText = gd.TextBold;
-                    paint.TextSkewX = -0.25f;
+                using var paint = new SKPaint();
+                paint.StrokeWidth = 1;
+                paint.TextSize = gd.FontSize;
+                paint.IsAntialias = true;
+                paint.Typeface = gd.Font;
+                paint.Color = gd.Color.WithAlpha((byte)(255 * gd.BlendPercentage));
+                paint.FakeBoldText = gd.TextBold;
+                //paint.TextSkewX = -0.25f;
 
-                    canvas.DrawText(gd.Text, gd.Location.X, gd.Location.Y, paint);
-                }
+                var matrix= SKMatrix.CreateRotation(45);
+
+                canvas.DrawText(gd.Text, gd.Location.X, gd.Location.Y, paint);
             });
         }
 
@@ -311,52 +317,51 @@ namespace Lazy.Captcha.Core.Generator.Image
         /// <param name="width">验证码宽度</param>
         /// <param name="height">验证码高度</param>
         /// <param name="text">要绘制的文本</param>
-        /// <param name="paint">画笔</param>
+        /// <param name="font">画笔</param>
+        /// <param name="fontSize"></param>
         /// <returns>返回每个字符的位置</returns>
         public virtual List<PointF> MeasureTextPositions(int width, int height, string text, SKTypeface font, float fontSize)
         {
-            using (var paint = new SKPaint())
+            using var paint = new SKPaint();
+            paint.StrokeWidth = 1;
+            paint.TextSize = fontSize;
+            paint.IsAntialias = true;
+            paint.Typeface = font;
+
+            var result = new List<PointF>();
+            if (string.IsNullOrWhiteSpace(text)) return result;
+
+            // 计算每个字符宽度
+            var charWidths = new List<float>();
+            foreach (var s in text)
             {
-                paint.StrokeWidth = 1;
-                paint.TextSize = fontSize;
-                paint.IsAntialias = true;
-                paint.Typeface = font;
-
-                var result = new List<PointF>();
-                if (string.IsNullOrWhiteSpace(text)) return result;
-
-                // 计算每个字符宽度
-                var charWidths = new List<float>();
-                foreach (var s in text)
-                {
-                    var charWidth = paint.MeasureText(s.ToString());
-                    charWidths.Add(charWidth);
-                }
-
-                // 计算每个字符x坐标
-                var currentX = 0.0f;
-                var charTotalWidth = charWidths.Sum(x => x);
-                var charXs = new List<float>();
-
-                // 计算字体高度（取最高的）
-                SKRect textBounds = new SKRect();
-                paint.MeasureText(text, ref textBounds);
-                var fontHeight = (int)textBounds.Height;
-
-                for (var i = 0; i < text.Count(); i++)
-                {
-                    // 根据文字宽度比例，计算文字包含框宽度
-                    var wrapperWidth = charWidths[i] * 1.0f / charTotalWidth * width;
-                    // 文字在包含框内的padding
-                    var padding = (wrapperWidth - charWidths[i]) / 2;
-                    var textX = currentX + padding;
-                    int textY = (height + fontHeight) / 2;  // 文字的纵坐标
-                    result.Add(new PointF(textX, textY));
-                    currentX += wrapperWidth;
-                }
-
-                return result;
+                var charWidth = paint.MeasureText(s.ToString());
+                charWidths.Add(charWidth);
             }
+
+            // 计算每个字符x坐标
+            var currentX = 0.0f;
+            var charTotalWidth = charWidths.Sum(x => x);
+            var charXs = new List<float>();
+
+            // 计算字体高度（取最高的）
+            SKRect textBounds = new SKRect();
+            paint.MeasureText(text, ref textBounds);
+            var fontHeight = (int)textBounds.Height;
+
+            for (var i = 0; i < text.Count(); i++)
+            {
+                // 根据文字宽度比例，计算文字包含框宽度
+                var wrapperWidth = charWidths[i] * 1.0f / charTotalWidth * width;
+                // 文字在包含框内的padding
+                var padding = (wrapperWidth - charWidths[i]) / 2;
+                var textX = currentX + padding;
+                int textY = (height + fontHeight) / 2;  // 文字的纵坐标
+                result.Add(new PointF(textX, textY));
+                currentX += wrapperWidth;
+            }
+
+            return result;
         }
 
         /// <summary>

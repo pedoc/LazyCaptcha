@@ -25,6 +25,7 @@
     <None Remove="fonts\headache.ttf" />
     <None Remove="fonts\kaiti.ttf" />
     <None Remove="fonts\lexo.ttf" />
+    <None Remove="fonts\lucida-grande-bold-italic.otf" />
     <None Remove="fonts\prefix.ttf" />
     <None Remove="fonts\progbot.ttf" />
     <None Remove="fonts\ransom.ttf" />
@@ -38,6 +39,7 @@
     <EmbeddedResource Include="fonts\headache.ttf" />
     <EmbeddedResource Include="fonts\kaiti.ttf" />
     <EmbeddedResource Include="fonts\lexo.ttf" />
+    <EmbeddedResource Include="fonts\lucida-grande-bold-italic.otf" />
     <EmbeddedResource Include="fonts\prefix.ttf" />
     <EmbeddedResource Include="fonts\progbot.ttf" />
     <EmbeddedResource Include="fonts\ransom.ttf" />

@@ -57,7 +57,8 @@ namespace Sample.Winfrom
                 { "Headache", this.Headache_Pbx },
                 { "Lexo", this.Lexo_Pbx },
                 { "Progbot", this.Progbot_Pbx },
-                { "Robot", this.Robot_Pbx }
+                { "Robot", this.Robot_Pbx },
+                { "LucidaGrandeBoldItalic", this.LucidaGrandePbx },
             };
         }
 
@@ -305,19 +306,19 @@ namespace Sample.Winfrom
                 if (Directory.Exists(trainDir))
                     Directory.Delete(trainDir, true);
             }
-            catch(Exception ex){}               
+            catch (Exception ex) { }
 
             try
             {
                 if (Directory.Exists(valDir))
                     Directory.Delete(valDir, true);
             }
-            catch(Exception ex){}
+            catch (Exception ex) { }
 
             Directory.CreateDirectory(trainDir);
             Directory.CreateDirectory(valDir);
 
-            var count = 10_0000;
+            var count = 100_000;
             for (int i = 1; i <= count; i++)
             {
                 var captchaId = Guid.NewGuid().ToString();
@@ -341,31 +342,31 @@ namespace Sample.Winfrom
             static byte[] ApplyFilter(byte[] data)
             {
                 return data;
-                SKBitmap originalBitmap = SKBitmap.Decode(data);
-                SKBitmap blackWhiteBitmap = new SKBitmap(originalBitmap.Width, originalBitmap.Height);
-
-                for (int x = 0; x < originalBitmap.Width; x++)
-                {
-                    for (int y = 0; y < originalBitmap.Height; y++)
-                    {
-                        // 获取原始图像的像素颜色
-                        SKColor originalColor = originalBitmap.GetPixel(x, y);
-
-                        // 计算灰度值
-                        int grayValue = (int)(originalColor.Red * 0.299f +
-                                              originalColor.Green * 0.587f +
-                                              originalColor.Blue * 0.114f);
-
-                        // 根据灰度值判断是否设置为黑色或白色
-                        SKColor blackWhiteColor = grayValue > 127 ? SKColors.White : SKColors.Black;
-
-                        // 在黑白图像上设置像素颜色
-                        blackWhiteBitmap.SetPixel(x, y, blackWhiteColor);
-                    }
-                }
-
-                var r = blackWhiteBitmap.Encode(SKEncodedImageFormat.Png, 100);
-                return r.ToArray();
+                // SKBitmap originalBitmap = SKBitmap.Decode(data);
+                // SKBitmap blackWhiteBitmap = new SKBitmap(originalBitmap.Width, originalBitmap.Height);
+                //
+                // for (int x = 0; x < originalBitmap.Width; x++)
+                // {
+                //     for (int y = 0; y < originalBitmap.Height; y++)
+                //     {
+                //         // 获取原始图像的像素颜色
+                //         SKColor originalColor = originalBitmap.GetPixel(x, y);
+                //
+                //         // 计算灰度值
+                //         int grayValue = (int)(originalColor.Red * 0.299f +
+                //                               originalColor.Green * 0.587f +
+                //                               originalColor.Blue * 0.114f);
+                //
+                //         // 根据灰度值判断是否设置为黑色或白色
+                //         SKColor blackWhiteColor = grayValue > 127 ? SKColors.White : SKColors.Black;
+                //
+                //         // 在黑白图像上设置像素颜色
+                //         blackWhiteBitmap.SetPixel(x, y, blackWhiteColor);
+                //     }
+                // }
+                //
+                // var r = blackWhiteBitmap.Encode(SKEncodedImageFormat.Png, 100);
+                // return r.ToArray();
             }
 
             static void TryWrite(string path, byte[] data)
@@ -398,8 +399,8 @@ namespace Sample.Winfrom
                 for (int i = 0; i < length; i++)
                 {
                     var c1 = (char)Random.Shared.Next(48, 57 + 1);
-                    var c2 = (char) Random.Shared.Next(97, 122 + 1);
-                    var c3 = (char) Random.Shared.Next(65, 90 + 1);
+                    var c2 = (char)Random.Shared.Next(97, 122 + 1);
+                    var c3 = (char)Random.Shared.Next(65, 90 + 1);
                     sb.Append(new List<char>() { c1, c2, c3 }.Shuffle().First());
                 }
 

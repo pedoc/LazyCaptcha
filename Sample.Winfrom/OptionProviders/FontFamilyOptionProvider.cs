@@ -25,6 +25,7 @@ namespace Sample.Winfrom.OptionProviders
                 new FontFamilyOption("Lexo", DefaultFontFamilys.Instance.Lexo),
                 new FontFamilyOption("Progbot", DefaultFontFamilys.Instance.Progbot),
                 new FontFamilyOption("Robot", DefaultFontFamilys.Instance.Robot),
+                new FontFamilyOption("LucidaGrandeBoldItalic", DefaultFontFamilys.Instance.LucidaGrande),
             };
         }
     }

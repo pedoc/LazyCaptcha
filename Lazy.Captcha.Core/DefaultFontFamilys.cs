@@ -22,7 +22,8 @@ namespace Lazy.Captcha.Core
             { "ransom", "Ransom" },
             { "robot", "Robot Teacher" },
             { "scandal", "Potassium Scandal" },
-            { "kaiti", "FZKai-Z03" }
+            { "kaiti", "FZKai-Z03" },
+            { "lucida grande", "Lucida Grande" }
         };
 
         static DefaultFontFamilys()
@@ -181,6 +182,14 @@ namespace Lazy.Captcha.Core
             get
             {
                 return GetFontFamily("Kaiti");
+            }
+        }
+
+        public SKTypeface LucidaGrande
+        {
+            get
+            {
+                return GetFontFamily("Lucida Grande");
             }
         }
     }
